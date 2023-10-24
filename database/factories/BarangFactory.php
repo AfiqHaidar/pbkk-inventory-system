@@ -26,8 +26,8 @@ class BarangFactory extends Factory
             'kecacatan' => $this->faker->sentence,
             'jumlah' => $this->faker->numberBetween(1, 100),
             'gambar' => 'barang/' . $this->faker->image('public/storage/barang', 400, 300, null, false),
-            'jenis_id' => $this->faker->numberBetween(1, 2),
-            'kondisi_id' => $this->faker->numberBetween(1, 2),
+            'jenis_id' => $this->faker->numberBetween(1, 4), // ada 4 Jenis barang pada Jenis
+            'kondisi_id' => $this->faker->numberBetween(1, 3), // ada 3 Kondisi barang pada Kondisi
             'user_id' => $this->faker->numberBetween(1, 6),
         ];
     }

@@ -54,16 +54,18 @@
                 <div class="mb-6">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="jenis_id">Jenis Barang:</label>
                     <select  name="jenis_id" id="jenis_id" value="{{ $barang->jenis_id }}">
-                        <option value="1">Makanan</option>
-                        <option value="2">Pakaian</option>
+                        @foreach ($jenis as $j)
+                        <option value="{{ $j->id }}"> {{ $j->nama }}</option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div class="mb-6">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="kondisi_id">Kondisi Barang:</label>
                     <select name="kondisi_id" id="kondisi_id" value="{{ $barang->kondisi_id }}">
-                        <option value="1">Baik</option>
-                        <option value="2">buruk</option>
+                        @foreach ($kondisi as $k)
+                        <option value="{{ $k->id }}"> {{ $k->nama }}</option>
+                        @endforeach
                     </select>
                 </div>
 

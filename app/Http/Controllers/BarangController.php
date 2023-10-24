@@ -59,12 +59,14 @@ class BarangController extends Controller
     public function edit($id)
     {
         $barang = Barang::find($id);
+        $jenis = Jenis::all();
+        $kondisi = Kondisi::all();
 
         if (!$barang) {
             return redirect()->route('barang.dashboard')->with('error', 'Barang not found');
         }
 
-        return view('barang.edit', ['barang' => $barang]);
+        return view('barang.edit', ['barang' => $barang], ['jenis' => $jenis],  ['kondisi' => $kondisi]);
     }
 
     public function update(Request $request, $id)
@@ -80,14 +82,19 @@ class BarangController extends Controller
             'keterangan' => 'required|string|max:255',
             'kecacatan' => 'string|max:255',
             'jumlah' => 'required|numeric',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:10048',
             'jenis_id' => 'required',
             'kondisi_id' => 'required',
         ]);
 
+        if ($request->hasFile('gambar')) {
+            // Validate the new image
+            $request->validate([
+                'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:10048',
+            ]);
 
-        $imagePath = $request->file('gambar')->store('barang', 'public');
-        $barang->gambar = $imagePath;
+            $imagePath = $request->file('gambar')->store('barang', 'public');
+            $barang->gambar = $imagePath;
+        }
 
 
         // Update other fields
